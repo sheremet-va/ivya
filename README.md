@@ -25,4 +25,4 @@ const elements = ivya.querySelector(selector, document.body, false)
 
 ## See more
 
-- [Locators guide in PLaywright's documentation](https://playwright.dev/docs/locators#locator-operators)
+- [Locators guide in Playwright's documentation](https://playwright.dev/docs/locators#locator-operators)
