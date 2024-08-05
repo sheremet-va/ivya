@@ -8,3 +8,8 @@ export {
   getByTextSelector,
   getByTitleSelector,
 } from './locatorUtils'
+
+export type { SelectorEngine, SelectorRoot } from './ivya'
+export type { ParsedSelector, ParsedSelectorPart } from './selectorParser'
+
+export { asLocator } from './locatorGenerators'
