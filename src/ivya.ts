@@ -123,13 +123,13 @@ export class Ivya {
 
   queryLocatorSelector(
     locator: string,
-    root: Node = document.body,
+    root: Node = document.documentElement,
     strict: boolean = true
   ) {
     return this.querySelector(this.parseSelector(locator), root, strict)
   }
 
-  queryLocatorSelectorAll(locator: string, root: Node = document.body) {
+  queryLocatorSelectorAll(locator: string, root: Node = document.documentElement) {
     return this.querySelectorAll(this.parseSelector(locator), root)
   }
 

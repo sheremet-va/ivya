@@ -1,4 +1,4 @@
-import { getByRoleSelector, Ivya } from 'ivya'
+import { getByRoleSelector, Ivya } from '../src'
 import { expect, test } from 'vitest'
 
 test('works correctly', () => {
@@ -10,7 +10,13 @@ test('works correctly', () => {
     browser: 'chromium',
   })
 
+  const buttonSelector = getByRoleSelector('button', { name: 'Click me' })
+
   expect(
-    ivya.queryLocatorSelector(getByRoleSelector('button', { name: 'Click me' }))
+    ivya.queryLocatorSelector(buttonSelector)
+  ).toBe(button)
+
+  expect(
+    ivya.queryLocatorSelector(`css=body >> ${buttonSelector}`)
   ).toBe(button)
 })
