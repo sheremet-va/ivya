@@ -1,7 +1,7 @@
 {
   "name": "ivya",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Fork of Playwright's locator resolution",
   "main": "./dist/index.js",
   "repository": {
