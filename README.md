@@ -22,16 +22,39 @@ const ivya = Ivya.create({
 const element = ivya.queryLocatorSelector(
   getByRoleSelector('button', { name: 'Click Me!' })
 )
+// using a wrapper function
+const element = ivya.queryByRole('button', { name: 'Click Me!' })
+const elements = ivya.queryAllByRole('button', { name: 'Click Me!' })
 
+// using Playwright selectors
 const element = ivya.queryLocatorSelector('text=Click Me!')
 const element = ivya.queryLocatorSelector('css=button[data-click]')
 
-// using parsed locator (good for caching)
+// using parsed selector (good for caching)
 const selector = ivya.parseSelector(
   getByRoleSelector('button', { name: 'Click Me!' })
 )
 const elements = ivya.querySelector(selector, document.body, false)
 ```
+
+## Supported methods
+
+All query methods follow the same rules described in the [Playwright documentation](https://playwright.dev/docs/locators#locator-operators), but return an HTML element instead of a locator.
+
+- `ivya.queryByRole(name: string, options?: ByRoleOptions): Element | null`
+- `ivya.queryByTestId(name: string): Element | null`
+- `ivya.queryByLabelText(matcher: string | RegExp, options?: { exact?: boolean }): Element | null`
+- `ivya.queryByText(matcher: string | RegExp, options?: { exact?: boolean }): Element | null`
+- `ivya.queryByTitle(matcher: string | RegExp, options?: { exact?: boolean }): Element | null`
+- `ivya.queryByPlaceholder(matcher: string | RegExp, options?: { exact?: boolean }): Element | null`
+- `ivya.queryByAltText(matcher: string | RegExp, options?: { exact?: boolean }): Element | null`
+- `ivya.queryAllByRole(name: string, options?: ByRoleOptions): Element[]`
+- `ivya.queryAllByTestId(name: string): Element[]`
+- `ivya.queryAllByLabelText(matcher: string | RegExp, options?: { exact?: boolean }): Element[]`
+- `ivya.queryAllByText(matcher: string | RegExp, options?: { exact?: boolean }): Element[]`
+- `ivya.queryAllByTitle(matcher: string | RegExp, options?: { exact?: boolean }): Element[]`
+- `ivya.queryAllByPlaceholder(matcher: string | RegExp, options?: { exact?: boolean }): Element[]`
+- `ivya.queryAllByAltText(matcher: string | RegExp, options?: { exact?: boolean }): Element[]`
 
 ## See more
 
