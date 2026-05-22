@@ -53,7 +53,7 @@ test('file input', () => {
   )
 })
 
-test.only('asLocator generates "exact" correctly dependning on the default', () => {
+test('asLocator generates "exact" correctly dependning on the default', () => {
   Ivya.options.exact = false
 
   expect(asLocator('javascript', getByTextSelector('Hello'))).toMatchInlineSnapshot(
