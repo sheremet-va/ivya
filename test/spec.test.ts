@@ -8,7 +8,12 @@ import {
   Ivya,
   asLocator,
 } from '../src'
-import { expect, test } from 'vitest'
+import { beforeEach, expect, test } from 'vitest'
+
+beforeEach(() => {
+  // the default
+  Ivya.options.exact = false
+})
 
 test('works correctly', () => {
   const button = document.createElement('button')
@@ -46,6 +51,64 @@ test('file input', () => {
   expect(ivya.generateSelectorSimple(input)).toMatchInlineSnapshot(
     `"internal:testid=[data-testid="test2"s]"`
   )
+})
+
+test.only('asLocator generates "exact" correctly dependning on the default', () => {
+  Ivya.options.exact = false
+
+  expect(asLocator('javascript', getByTextSelector('Hello'))).toMatchInlineSnapshot(
+    `"getByText('Hello')"`
+  )
+  expect(
+    asLocator('javascript', getByTextSelector('Hello', { exact: true }))
+  ).toMatchInlineSnapshot(`"getByText('Hello', { exact: true })"`)
+  expect(
+    asLocator('javascript', getByTextSelector('Hello', { exact: false }))
+  ).toMatchInlineSnapshot(`"getByText('Hello')"`)
+
+  expect(
+    asLocator('javascript', getByRoleSelector('alert', { name: 'Hello' }))
+  ).toMatchInlineSnapshot(`"getByRole('alert', { name: 'Hello' })"`)
+  expect(
+    asLocator(
+      'javascript',
+      getByRoleSelector('alert', { name: 'Hello', exact: true })
+    )
+  ).toMatchInlineSnapshot(`"getByRole('alert', { name: 'Hello', exact: true })"`)
+  expect(
+    asLocator(
+      'javascript',
+      getByRoleSelector('alert', { name: 'Hello', exact: false })
+    )
+  ).toMatchInlineSnapshot(`"getByRole('alert', { name: 'Hello' })"`)
+
+  Ivya.options.exact = true
+
+  expect(asLocator('javascript', getByTextSelector('Hello'))).toMatchInlineSnapshot(
+    `"getByText('Hello')"`
+  )
+  expect(
+    asLocator('javascript', getByTextSelector('Hello', { exact: true }))
+  ).toMatchInlineSnapshot(`"getByText('Hello')"`)
+  expect(
+    asLocator('javascript', getByTextSelector('Hello', { exact: false }))
+  ).toMatchInlineSnapshot(`"getByText('Hello', { exact: false })"`)
+
+  expect(
+    asLocator('javascript', getByRoleSelector('alert', { name: 'Hello' }))
+  ).toMatchInlineSnapshot(`"getByRole('alert', { name: 'Hello' })"`)
+  expect(
+    asLocator(
+      'javascript',
+      getByRoleSelector('alert', { name: 'Hello', exact: true })
+    )
+  ).toMatchInlineSnapshot(`"getByRole('alert', { name: 'Hello' })"`)
+  expect(
+    asLocator(
+      'javascript',
+      getByRoleSelector('alert', { name: 'Hello', exact: false })
+    )
+  ).toMatchInlineSnapshot(`"getByRole('alert', { name: 'Hello', exact: false })"`)
 })
 
 test('global exact option affects all selector helpers', () => {

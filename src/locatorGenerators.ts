@@ -24,6 +24,7 @@ import {
   parseSelector,
   stringifySelector,
 } from './selectorParser'
+import { Ivya } from '.'
 
 export type Language = 'javascript'
 export type LocatorType =
@@ -417,8 +418,8 @@ export class JavaScriptLocatorFactory implements LocatorFactory {
           attrs.push(`name: ${this.regexToSourceString(options.name)}`)
         } else if (typeof options.name === 'string') {
           attrs.push(`name: ${this.quote(options.name)}`)
-          if (options.exact) {
-            attrs.push(`exact: true`)
+          if (options.exact != null && Ivya.options.exact !== options.exact) {
+            attrs.push(`exact: ${options.exact}`)
           }
         }
         for (const { name, value } of options.attrs!) {
@@ -478,8 +479,8 @@ export class JavaScriptLocatorFactory implements LocatorFactory {
     if (isRegExp(body)) {
       return `${method}(${this.regexToSourceString(body)})`
     }
-    return exact
-      ? `${method}(${this.quote(body)}, { exact: true })`
+    return exact != null && Ivya.options.exact !== exact
+      ? `${method}(${this.quote(body)}, { exact: ${exact} })`
       : `${method}(${this.quote(body)})`
   }
 
