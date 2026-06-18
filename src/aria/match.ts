@@ -108,6 +108,12 @@ export interface MatchAriaResult {
   resolved: string
 }
 
+/**
+ * Matches a captured ARIA tree against a parsed template.
+ *
+ * Returns whether the match passed and the resolved output used for diffing
+ * and snapshot updates.
+ */
 export function matchAriaTree(
   root: AriaNode,
   template: AriaTemplateNode

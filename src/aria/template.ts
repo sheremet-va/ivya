@@ -25,6 +25,9 @@ export function formatNameValue(name: AriaRegex | string): string {
   return `/${name.pattern}/`
 }
 
+/**
+ * Renders an ARIA template back to its textual snapshot representation.
+ */
 export function renderAriaTemplate(template: AriaTemplateNode): string {
   const lines: string[] = []
   if (template.kind === 'text') {
